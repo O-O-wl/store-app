@@ -10,27 +10,31 @@ import UIKit
 
 // MARK: - StoreTableViewManager
 
-class StoreTableViewManager: NSObject {
+class StoreTableViewReactor: NSObject {
     
-    weak var stores: StoreListViewBindable?
+    weak var dataManager: StoreListViewManager?
+    
+    init(manager: StoreListViewManager) {
+        self.dataManager = manager
+    }
 }
 
 // MARK: - UITableViewDataSource
 
-extension StoreTableViewManager: UITableViewDataSource {
+extension StoreTableViewReactor: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return stores?.numOfCategories() ?? 0
+        return dataManager?.numOfCategories() ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return stores?.numOfMenusInCategory(section) ?? 0
+        return dataManager?.numOfMenusInCategory(section) ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
             let cell = tableView.dequeueReusableCell(with: MenuCell.self, for: indexPath),
-            let menu = stores?[menu: indexPath]
+            let menu = dataManager?[menu: indexPath]
             else { return MenuCell() }
         
         cell.configure(menu)
@@ -40,12 +44,12 @@ extension StoreTableViewManager: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 
-extension StoreTableViewManager: UITableViewDelegate {
+extension StoreTableViewReactor: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard
             let categoryHeader = tableView.dequeueReusableHeaderFooterView(with: CategoryHeaderView.self),
-            let category = stores?[category: section]
+            let category = dataManager?[category: section]
             else { return nil }
         
         categoryHeader.configure(category: category)
@@ -53,6 +57,7 @@ extension StoreTableViewManager: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        stores?.select(at: indexPath)
+        tableView.deselectRow(at: indexPath, animated: true)
+        dataManager?.select(at: indexPath)
     }
 }

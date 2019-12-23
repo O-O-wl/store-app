@@ -34,8 +34,10 @@ protocol StoreListViewInteractable: AnyObject {
     var dataDidSelected: ((Menu) -> Void)? { get set }
 }
 
+protocol StoreListViewManager:  StoreListViewDataSource, StoreListViewDelegate {}
+
 // MARK: - StoreListViewBindable
 
-protocol StoreListViewBindable: StoreListViewDataSource, StoreListViewDelegate, StoreListViewInteractable {
+protocol StoreListViewBindable: StoreListViewManager, StoreListViewInteractable {
     
 }
