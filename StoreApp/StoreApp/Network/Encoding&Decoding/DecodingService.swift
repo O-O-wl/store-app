@@ -7,3 +7,10 @@
 //
 
 import Foundation
+
+struct DecodingService {
+    
+    static func decode<D: Decodable>(type: D.Type, data: Data) -> D? {
+        return try? JSONDecoder().decode(D.self, from: data)
+    }
+}
