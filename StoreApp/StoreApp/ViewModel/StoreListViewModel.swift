@@ -16,11 +16,13 @@ final class StoreListViewModel: StoreListViewBindable {
     
     // MARK: - Dependencies
     
-    private let service: DataServable
+    private let service: StoreDataService
     
     // MARK: - Properties
     
-    private var stores: [Store] = []
+    private var stores: [Store] = [Store(category: .main, menus: []),
+                                   Store(category: .soup, menus: []),
+                                   Store(category: .side, menus: [])]
     
     // MARK: - Status Closure
     
@@ -31,7 +33,7 @@ final class StoreListViewModel: StoreListViewBindable {
     
     // MARK: - Initializer
     
-    init(service: DataServable) {
+    init(service: StoreDataService) {
         self.service = service
         fetchData()
     }
@@ -39,10 +41,11 @@ final class StoreListViewModel: StoreListViewBindable {
     // MARK: - Methods
     
     func numOfCategories() -> Int {
-        return stores.count
+        return stores.filter { !$0.menus.isEmpty }.count
     }
     
     func numOfMenusInCategory(_ category: Int) -> Int {
+        
         return stores[category].menus.count
     }
     
@@ -69,14 +72,49 @@ final class StoreListViewModel: StoreListViewBindable {
 extension StoreListViewModel {
     
     private func fetchData() {
-        service.fetchData { [weak self] result in
-            switch result {
-            case .success(let stores):
-                self?.stores = stores
-                self?.dataDidLoad?()
-            case .failure(let error):
-                self?.errorDidOccured?(error)
-            }
+        service
+            .fetchData(category: .main)
+            .workSpace(.main)
+            .handle { result in
+                guard let result = result else { return }
+                switch result {
+                case .success(let menus):
+                    self.stores[0].menus = menus
+                    self.dataDidLoad?()
+                    print("Log:  \(self.stores[0].category.description) 0")
+                case .failure(let error):
+                    self.errorDidOccured?(error)
+                }
+        }
+        
+        service
+            .fetchData(category: .soup)
+            .workSpace(.main)
+            .handle { result in
+                guard let result = result else { return }
+                switch result {
+                case .success(let menus):
+                    self.stores[1].menus = menus
+                    self.dataDidLoad?()
+                    print("Log:  \(self.stores[1].category.description) 1")
+                case .failure(let error):
+                    self.errorDidOccured?(error)
+                }
+        }
+        
+        service
+            .fetchData(category: .side)
+            .workSpace(.main)
+            .handle { result in
+                guard let result = result else { return }
+                switch result {
+                case .success(let menus):
+                    self.stores[2].menus = menus
+                    self.dataDidLoad?()
+                    print("Log:  \(self.stores[2].category.description) 2")
+                case .failure(let error):
+                    self.errorDidOccured?(error)
+                }
         }
     }
 }
