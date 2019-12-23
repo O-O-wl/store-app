@@ -26,9 +26,12 @@ enum MultiEndPoint {
 // MARK: - EndPoint
 
 extension MultiEndPoint: EndPoint {
-    
     var baseURL: URL {
         return endPoint.baseURL
+    }
+    
+    var path: String {
+        return endPoint.path
     }
     
     var method: HTTP.Method {
