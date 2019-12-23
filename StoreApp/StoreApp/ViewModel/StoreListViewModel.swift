@@ -71,17 +71,17 @@ final class StoreListViewModel: StoreListViewBindable {
 
 extension StoreListViewModel {
     
+    // FIXME: - Section 데이터 가져오기 로직 수정
     private func fetchData() {
         service
             .fetchData(category: .main)
-            .workSpace(.main)
+            .work(on: .main)
             .handle { result in
                 guard let result = result else { return }
                 switch result {
                 case .success(let menus):
                     self.stores[0].menus = menus
                     self.dataDidLoad?()
-                    print("Log:  \(self.stores[0].category.description) 0")
                 case .failure(let error):
                     self.errorDidOccured?(error)
                 }
@@ -89,14 +89,13 @@ extension StoreListViewModel {
         
         service
             .fetchData(category: .soup)
-            .workSpace(.main)
+            .work(on: .main)
             .handle { result in
                 guard let result = result else { return }
                 switch result {
                 case .success(let menus):
                     self.stores[1].menus = menus
                     self.dataDidLoad?()
-                    print("Log:  \(self.stores[1].category.description) 1")
                 case .failure(let error):
                     self.errorDidOccured?(error)
                 }
@@ -104,14 +103,13 @@ extension StoreListViewModel {
         
         service
             .fetchData(category: .side)
-            .workSpace(.main)
+            .work(on: .main)
             .handle { result in
                 guard let result = result else { return }
                 switch result {
                 case .success(let menus):
                     self.stores[2].menus = menus
                     self.dataDidLoad?()
-                    print("Log:  \(self.stores[2].category.description) 2")
                 case .failure(let error):
                     self.errorDidOccured?(error)
                 }

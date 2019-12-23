@@ -13,7 +13,7 @@ class StoreRepository: StoreDataService {
     
     typealias API = BaminChanAPI
     
-    func fetchData(category: Category) -> Promiss<Result<[Menu], Error>> {
+    func fetchData(category: Category) -> Promise<Result<[Menu], Error>> {
         var endPoint: API
         switch category {
         case .main: endPoint = .main

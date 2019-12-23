@@ -11,8 +11,8 @@ import Foundation
 struct Router {
     static let session = URLSession(configuration: .default)
     
-    static func route(to endpoint: EndPoint) -> Promiss<Result<[Menu], Error>> {
-        let promiss = Promiss<Result<[Menu], Error>>()
+    static func route(to endpoint: EndPoint) -> Promise<Result<[Menu], Error>> {
+        let promiss = Promise<Result<[Menu], Error>>()
         guard let request = EncodingService.encode(endpoint) else { return promiss }
         
         let task = session.dataTask(with: request) {

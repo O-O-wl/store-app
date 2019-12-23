@@ -44,7 +44,7 @@
 		0EBAB4DB239E490400F1FB20 /* StoreListViewPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBAB4DA239E490400F1FB20 /* StoreListViewPresentable.swift */; };
 		0EBAB4DF239ECE6600F1FB20 /* MultiEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBAB4DE239ECE6600F1FB20 /* MultiEndPoint.swift */; };
 		0EBAB4E1239EDB1300F1FB20 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBAB4E0239EDB1300F1FB20 /* Category.swift */; };
-		0EF5183823B14AD100151E7D /* Promiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF5183723B14AD100151E7D /* Promiss.swift */; };
+		0EF5183823B14AD100151E7D /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF5183723B14AD100151E7D /* Promise.swift */; };
 		0EF5183A23B14B8500151E7D /* EncodingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF5183923B14B8500151E7D /* EncodingService.swift */; };
 		0EF5183C23B14B9200151E7D /* DecodingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF5183B23B14B9200151E7D /* DecodingService.swift */; };
 		0EF5183F23B14BF700151E7D /* EncodableWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF5183E23B14BF700151E7D /* EncodableWrapper.swift */; };
@@ -93,7 +93,7 @@
 		0EBAB4DA239E490400F1FB20 /* StoreListViewPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreListViewPresentable.swift; sourceTree = "<group>"; };
 		0EBAB4DE239ECE6600F1FB20 /* MultiEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiEndPoint.swift; sourceTree = "<group>"; };
 		0EBAB4E0239EDB1300F1FB20 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
-		0EF5183723B14AD100151E7D /* Promiss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Promiss.swift; sourceTree = "<group>"; };
+		0EF5183723B14AD100151E7D /* Promise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Promise.swift; sourceTree = "<group>"; };
 		0EF5183923B14B8500151E7D /* EncodingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodingService.swift; sourceTree = "<group>"; };
 		0EF5183B23B14B9200151E7D /* DecodingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingService.swift; sourceTree = "<group>"; };
 		0EF5183E23B14BF700151E7D /* EncodableWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodableWrapper.swift; sourceTree = "<group>"; };
@@ -294,7 +294,7 @@
 				0EB548A3239A142700C88B1D /* HTTP.swift */,
 				0EB548A6239A1A3E00C88B1D /* URLRequestConvertible.swift */,
 				0EB548A8239A1A6D00C88B1D /* URLRequest+.swift */,
-				0EF5183723B14AD100151E7D /* Promiss.swift */,
+				0EF5183723B14AD100151E7D /* Promise.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -454,7 +454,7 @@
 			files = (
 				0EB548B9239A828C00C88B1D /* StoreDataService.swift in Sources */,
 				0E2F3C9323A2A315004EECDB /* StoreTableViewReactor.swift in Sources */,
-				0EF5183823B14AD100151E7D /* Promiss.swift in Sources */,
+				0EF5183823B14AD100151E7D /* Promise.swift in Sources */,
 				0EB548BE239A83E300C88B1D /* DummyAPI.swift in Sources */,
 				0EF5183A23B14B8500151E7D /* EncodingService.swift in Sources */,
 				0EB548A9239A1A6D00C88B1D /* URLRequest+.swift in Sources */,

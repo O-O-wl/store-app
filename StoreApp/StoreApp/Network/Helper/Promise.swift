@@ -8,34 +8,34 @@
 
 import Foundation
 
-class Promiss<T> {
+class Promise<T> {
     
     // MARK: - Properties
     
     var value: T? {
         didSet {
             let task = DispatchWorkItem(block: { self.handler?(self.value) })
-            workSpace(task)
+            thread(task)
         }
     }
     
-    private var workSpace = DispatchQueue.global().async(execute:)
+    private var thread = DispatchQueue.global().async(execute:)
     
     private var handler: ((T?) -> Void)? {
         didSet {
             let task = DispatchWorkItem(block: { self.handler?(self.value) })
-            workSpace(task)
+            thread(task)
         }
     }
     // MARK: - Methods
     
     @discardableResult
-    func workSpace(_ type: ProcessingThread) -> Self {
-        switch type {
+    func work(on threadType: ProcessingThread) -> Self {
+        switch threadType {
         case .main:
-            self.workSpace = DispatchQueue.main.async(execute:)
+            self.thread = DispatchQueue.main.async(execute:)
         case .global:
-            self.workSpace = DispatchQueue.global().async(execute:)
+            self.thread = DispatchQueue.global().async(execute:)
         }
         
         return self

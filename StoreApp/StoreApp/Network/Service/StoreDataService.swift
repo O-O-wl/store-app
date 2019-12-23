@@ -10,5 +10,5 @@ import Foundation
 
 
 protocol StoreDataService {
-    func fetchData(category: Category) -> Promiss<Result<[Menu], Error>>
+    func fetchData(category: Category) -> Promise<Result<[Menu], Error>>
 }
