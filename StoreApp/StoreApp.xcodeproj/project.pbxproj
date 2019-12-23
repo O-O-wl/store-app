@@ -136,12 +136,12 @@
 			path = "Encoding&Decoding";
 			sourceTree = "<group>";
 		};
-		0E2F3C9123A2A2E4004EECDB /* Helper */ = {
+		0E2F3C9123A2A2E4004EECDB /* Reactor */ = {
 			isa = PBXGroup;
 			children = (
 				0E2F3C9223A2A315004EECDB /* StoreTableViewReactor.swift */,
 			);
-			path = Helper;
+			path = Reactor;
 			sourceTree = "<group>";
 		};
 		0EB548572396DAEF00C88B1D = {
@@ -195,7 +195,7 @@
 		0EB5487B2396E26000C88B1D /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				0E2F3C9123A2A2E4004EECDB /* Helper */,
+				0E2F3C9123A2A2E4004EECDB /* Reactor */,
 				0EB548672396DAEF00C88B1D /* StoreListViewController.swift */,
 				0EBAB4DA239E490400F1FB20 /* StoreListViewPresentable.swift */,
 			);
