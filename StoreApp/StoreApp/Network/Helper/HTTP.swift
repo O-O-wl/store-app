@@ -19,7 +19,6 @@ enum HTTP {
     }
     
     enum Task {
-        
         case request
         case requestWithQueryParameters(Encodable)
         case requestWithBodyParameters(Encodable)
@@ -32,5 +31,16 @@ enum HTTP {
         case clientError
         case serverError
         case unOfficial
+        
+        init(code: Int) {
+            switch code {
+            case 100..<200: self = .informationalResponse
+            case 200..<300: self = .success
+            case 300..<400: self = .redirection
+            case 400..<500: self = .clientError
+            case 500..<600: self = .serverError
+            default: self = .unOfficial
+            }
+        }
     }
 }
