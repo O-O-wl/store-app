@@ -47,4 +47,3 @@ enum DeliveryType: String, Decodable {
     case dawnShipping = "새벽배송"
     case nationalShipping = "전국택배"
 }
-
