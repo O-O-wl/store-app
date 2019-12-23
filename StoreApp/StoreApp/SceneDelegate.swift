@@ -19,11 +19,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: scene)
         window?.backgroundColor = .white
         
-        let service: DataServable = StubDataService()
+        let service: StoreDataService = StoreRepository()
         let viewModel: StoreListViewBindable = StoreListViewModel(service: service)
+        let reactor = StoreTableViewReactor(manager: viewModel)
         let viewController: StoreListViewPresentable = StoreListViewController()
         
-        window?.rootViewController = viewController.then { $0.viewModel = viewModel }
+        window?.rootViewController = viewController.then {
+            $0.viewModel = viewModel
+            $0.reactor = reactor
+        }
         window?.makeKeyAndVisible()
     }
 }

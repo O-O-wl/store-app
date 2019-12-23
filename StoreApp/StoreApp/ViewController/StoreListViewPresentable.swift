@@ -12,4 +12,5 @@ import UIKit
 protocol StoreListViewPresentable: UIViewController {
     
     var viewModel: StoreListViewBindable? { get set }
+    var reactor: StoreTableViewReactor? { get set }
 }

@@ -24,9 +24,9 @@ final class StoreListViewController: UIViewController, StoreListViewPresentable 
         didSet { bindViewModel() }
     }
     
-    // MARK: - Properties
-    
-    let storeTableViewManager = StoreTableViewManager()
+    var reactor: StoreTableViewReactor? {
+        didSet { bindReactor() }
+    }
     
     // MARK: - Life Cycle
     
@@ -57,8 +57,6 @@ extension StoreListViewController {
                         forCellReuseIdentifier: MenuCell.reuseId)
             $0.register(CategoryHeaderView.self,
                         forHeaderFooterViewReuseIdentifier: CategoryHeaderView.reuseId)
-            $0.dataSource = storeTableViewManager
-            $0.delegate = storeTableViewManager
             $0.rowHeight = UITableView.automaticDimension
             $0.sectionHeaderHeight = 70
             $0.separatorStyle = .none
@@ -79,32 +77,45 @@ extension StoreListViewController {
     private func bindViewModel() {
         guard let viewModel = viewModel else { return }
         
-        storeTableViewManager.stores = viewModel
-        
         viewModel.dataDidLoad = { [weak self] in
-            self?.storeTableView.reloadData()
+            DispatchQueue.main.async {
+                // FIXME: - Section 별로 reload 하게 수정
+                self?.storeTableView.reloadData()
+            }
         }
         
         viewModel.dataDidUpadated = { [weak self] in
-            self?.storeTableView.reloadData()
+            DispatchQueue.main.async {
+                self?.storeTableView.reloadData()
+            }
         }
         
         viewModel.errorDidOccured = { [weak self] error in
+            
             let alert = UIAlertController(title: "네트워크 오류",
                                           message: error.localizedDescription,
                                           preferredStyle: .alert)
-            alert.do {
-                $0.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                self?.present($0, animated: true, completion: nil)
+            DispatchQueue.main.async {
+                alert.do {
+                    $0.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                    self?.present($0, animated: true, completion: nil)
+                }
             }
         }
         
         viewModel.dataDidSelected = { menu in
             let description = "\(menu.title)\n\(menu.salePrice)"
-
+            
             DispatchQueue.main.async {
                 Toast(text: description, duration: Delay.short).show()
             }
+        }
+    }
+    
+    private func bindReactor() {
+        storeTableView.do {
+            $0.dataSource = reactor
+            $0.delegate = reactor
         }
     }
 }
