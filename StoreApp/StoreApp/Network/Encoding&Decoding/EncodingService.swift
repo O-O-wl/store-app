@@ -7,3 +7,17 @@
 //
 
 import Foundation
+
+struct EncodingService {
+    
+    static func encode(_ endpoint: EndPoint) -> URLRequest? {
+        switch endpoint.task {
+        case .request:
+            return endpoint.asURLRequest()
+        case .requestWithQueryParameters(let parameter):
+            return URLEncodedFormParameterEncoder.encode(endpoint, with: parameter)
+        case .requestWithBodyParameters(let parameter):
+            return JSONParameterEncoder.encode(endpoint, with: parameter)
+        }
+    }
+}

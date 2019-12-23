@@ -7,3 +7,11 @@
 //
 
 import Foundation
+
+struct EncodableWrapper: Encodable {
+    let encodable: Encodable
+    
+    func encode(to encoder: Encoder) throws {
+        try encodable.encode(to: encoder)
+    }
+}

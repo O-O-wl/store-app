@@ -12,11 +12,3 @@ import Foundation
 protocol ParameterEncoder {
     static func encode(_ request: URLRequestConvertible, with parameter: Encodable) -> URLRequest?
 }
-
-struct EncodableWrapper: Encodable {
-    let encodable: Encodable
-    
-    func encode(to encoder: Encoder) throws {
-        try encodable.encode(to: encoder)
-    }
-}
