@@ -9,7 +9,7 @@
 import Foundation
 
 
-protocol DataServable {
+protocol StoreDataService {
     
     func fetchData(completion: @escaping (Result<[Store], Error>) -> Void)
 }
