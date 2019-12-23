@@ -10,6 +10,5 @@ import Foundation
 
 
 protocol StoreDataService {
-    
-    func fetchData(completion: @escaping (Result<[Store], Error>) -> Void)
+    func fetchData(category: Category) -> Promiss<Result<[Menu], Error>>
 }
