@@ -17,14 +17,12 @@ final class StoreListViewModel: StoreListViewBindable {
     
     // MARK: - Properties
     
-    private var stores: [Store] = [Store(category: .main, menus: []),
-                                   Store(category: .soup, menus: []),
-                                   Store(category: .side, menus: [])]
+    private var stores: [Store] = Store.allStore()
     
     // MARK: - Status Closure
     
-    var dataDidLoad: (() -> Void)?
-    var dataDidUpadated: (() -> Void)?
+    var sectionDataDidUpdate: ((Int) -> Void)?
+    var rowDataDidUpdate: ((IndexPath) -> Void)?
     var errorDidOccured: ((Error) -> Void)?
     var dataDidSelected: ((Menu) -> Void)?
     
@@ -32,13 +30,14 @@ final class StoreListViewModel: StoreListViewBindable {
     
     init(service: StoreDataService) {
         self.service = service
+        
         fetchData()
     }
     
     // MARK: - Methods
     
     func numOfCategories() -> Int {
-        return stores.filter { !$0.menus.isEmpty }.count
+        return stores.count
     }
     
     func numOfMenusInCategory(_ category: Int) -> Int {
@@ -68,45 +67,20 @@ final class StoreListViewModel: StoreListViewBindable {
 
 extension StoreListViewModel {
     
-    // FIXME: - Section 데이터 가져오기 로직 수정
     private func fetchData() {
+        Category.allCases.forEach { fetchMenus(in: $0) }
+    }
+    
+    private func fetchMenus(in category: Category) {
         service
-            .fetchData(category: .main)
+            .fetchData(category: category)
             .work(on: .main)
             .handle { result in
                 guard let result = result else { return }
                 switch result {
                 case .success(let menus):
-                    self.stores[0].menus = menus
-                    self.dataDidLoad?()
-                case .failure(let error):
-                    self.errorDidOccured?(error)
-                }
-        }
-        
-        service
-            .fetchData(category: .soup)
-            .work(on: .main)
-            .handle { result in
-                guard let result = result else { return }
-                switch result {
-                case .success(let menus):
-                    self.stores[1].menus = menus
-                    self.dataDidLoad?()
-                case .failure(let error):
-                    self.errorDidOccured?(error)
-                }
-        }
-        
-        service
-            .fetchData(category: .side)
-            .work(on: .main)
-            .handle { result in
-                guard let result = result else { return }
-                switch result {
-                case .success(let menus):
-                    self.stores[2].menus = menus
-                    self.dataDidLoad?()
+                    self.stores[category.index].menus = menus
+                    self.sectionDataDidUpdate?(category.index)
                 case .failure(let error):
                     self.errorDidOccured?(error)
                 }

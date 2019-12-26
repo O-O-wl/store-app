@@ -12,13 +12,17 @@ import Then
 final class MenuCell: UITableViewCell, Reusable {
     
     // MARK: - UI
-    
+    static var a = true
     private let menuImageView = UIImageView()
     private let titleLabel = UILabel()
     private let detailLabel = UILabel()
     private let priceLabel = UILabel()
     private let salePriceLabel = UILabel()
     private let badgesListView = BadgeListView()
+    
+    // MARK: - Properties
+    
+    private var imageData: Promise<Data>?
     
     // MARK: - Initializer
     
@@ -66,6 +70,10 @@ extension MenuCell {
             priceLabel.attributedText = price
         }
         
+        if let url = URL(string: menu.imageURL) {
+            configureImage(contentOf: url)
+        }
+        
         menu.badge?.compactMap {
             let style = BadgeView.Style($0)
             return BadgeView(style: style, text: $0)
@@ -78,6 +86,18 @@ extension MenuCell {
             salePriceLabel.text = $0.salePrice
         }
         updateConstraints()
+    }
+    
+    private func configureImage(contentOf url: URL) {
+        imageData = ImageDataRepository.shared.fetchImageData(from: url)
+        
+        imageData?
+            .work(on: .main)
+            .handle { [weak self] in
+                guard let data = $0 else { return }
+                
+                self?.menuImageView.image = UIImage(data: data)
+        }
     }
     
     private func clear() {
