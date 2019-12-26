@@ -28,11 +28,13 @@ protocol StoreListViewDelegate: AnyObject {
 
 protocol StoreListViewInteractable: AnyObject {
     
-    var dataDidLoad: (() -> Void)? { get set }
-    var dataDidUpadated: (() -> Void)? { get set }
+    var sectionDataDidUpdate: ((Int) -> Void)? { get set }
+    var rowDataDidUpdate: ((IndexPath) -> Void)? { get set }
     var errorDidOccured: ((Error) -> Void)? { get set }
     var dataDidSelected: ((Menu) -> Void)? { get set }
 }
+
+// MARK: - StoreListViewManager
 
 protocol StoreListViewManager:  StoreListViewDataSource, StoreListViewDelegate {}
 

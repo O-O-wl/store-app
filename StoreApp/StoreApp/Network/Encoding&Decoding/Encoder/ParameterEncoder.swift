@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 protocol ParameterEncoder {
     static func encode(_ request: URLRequestConvertible, with parameter: Encodable) -> URLRequest?
 }

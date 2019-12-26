@@ -43,7 +43,7 @@ final class StoreListViewController: UIViewController, StoreListViewPresentable 
     }
 }
 
-// MARK: - Attrubutes & Layouts
+// MARK: - Attributes & Layouts
 
 extension StoreListViewController {
     
@@ -77,14 +77,13 @@ extension StoreListViewController {
     private func bindViewModel() {
         guard let viewModel = viewModel else { return }
         
-        viewModel.dataDidLoad = { [weak self] in
+        viewModel.sectionDataDidUpdate = { [weak self] section in
             DispatchQueue.main.async {
-                // FIXME: - Section 별로 reload 하게 수정
                 self?.storeTableView.reloadData()
             }
         }
         
-        viewModel.dataDidUpadated = { [weak self] in
+        viewModel.rowDataDidUpdate = { [weak self] indexPath in
             DispatchQueue.main.async {
                 self?.storeTableView.reloadData()
             }
