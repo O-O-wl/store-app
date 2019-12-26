@@ -19,6 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: scene)
         window?.backgroundColor = .white
         
+//        let service: StoreDataService = StubDataService()
         let service: StoreDataService = StoreRepository()
         let viewModel: StoreListViewBindable = StoreListViewModel(service: service)
         let reactor = StoreTableViewReactor(manager: viewModel)
