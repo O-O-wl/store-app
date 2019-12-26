@@ -14,6 +14,8 @@
 		0E160D9C23B14928000CA518 /* URLEncodedFormParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E160D9B23B14928000CA518 /* URLEncodedFormParameterEncoder.swift */; };
 		0E160D9E23B1496F000CA518 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E160D9D23B1496F000CA518 /* Router.swift */; };
 		0E2F3C9323A2A315004EECDB /* StoreTableViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2F3C9223A2A315004EECDB /* StoreTableViewReactor.swift */; };
+		0E591C2323B2DF9A002CFFC0 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E591C2223B2DF9A002CFFC0 /* Store.swift */; };
+		0E591C2523B2F32D002CFFC0 /* ImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E591C2423B2F32D002CFFC0 /* ImageRepository.swift */; };
 		0EB548642396DAEF00C88B1D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB548632396DAEF00C88B1D /* AppDelegate.swift */; };
 		0EB548662396DAEF00C88B1D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB548652396DAEF00C88B1D /* SceneDelegate.swift */; };
 		0EB548682396DAEF00C88B1D /* StoreListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB548672396DAEF00C88B1D /* StoreListViewController.swift */; };
@@ -61,6 +63,8 @@
 		0E160D9B23B14928000CA518 /* URLEncodedFormParameterEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLEncodedFormParameterEncoder.swift; sourceTree = "<group>"; };
 		0E160D9D23B1496F000CA518 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		0E2F3C9223A2A315004EECDB /* StoreTableViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreTableViewReactor.swift; sourceTree = "<group>"; };
+		0E591C2223B2DF9A002CFFC0 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		0E591C2423B2F32D002CFFC0 /* ImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepository.swift; sourceTree = "<group>"; };
 		0EB548602396DAEF00C88B1D /* StoreApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StoreApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EB548632396DAEF00C88B1D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0EB548652396DAEF00C88B1D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -120,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				0E160D0323AF8AE6000CA518 /* StoreRepository.swift */,
+				0E591C2423B2F32D002CFFC0 /* ImageRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -240,6 +245,7 @@
 				0EB548942399294B00C88B1D /* Menu.swift */,
 				0EBAB4E0239EDB1300F1FB20 /* Category.swift */,
 				0EF5184023B14C8500151E7D /* Response.swift */,
+				0E591C2223B2DF9A002CFFC0 /* Store.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -480,6 +486,7 @@
 				0E160D9A23B148FF000CA518 /* JSONParameterEncoder.swift in Sources */,
 				0E160D9E23B1496F000CA518 /* Router.swift in Sources */,
 				0EF5184323B14EBC00151E7D /* Encodable+.swift in Sources */,
+				0E591C2523B2F32D002CFFC0 /* ImageRepository.swift in Sources */,
 				0EF5183C23B14B9200151E7D /* DecodingService.swift in Sources */,
 				0EB548952399294B00C88B1D /* Menu.swift in Sources */,
 				0EB548872396EB1F00C88B1D /* UITableView+.swift in Sources */,
@@ -487,6 +494,7 @@
 				0EBAB4DF239ECE6600F1FB20 /* MultiEndPoint.swift in Sources */,
 				0EBAB4DB239E490400F1FB20 /* StoreListViewPresentable.swift in Sources */,
 				0EB5489823992C7000C88B1D /* StoreListViewModel.swift in Sources */,
+				0E591C2323B2DF9A002CFFC0 /* Store.swift in Sources */,
 				0EB548852396EAE000C88B1D /* Reusable.swift in Sources */,
 				0EB548892396ED5600C88B1D /* CategoryHeaderView.swift in Sources */,
 				0EB548912397A1EE00C88B1D /* UIColor+.swift in Sources */,
