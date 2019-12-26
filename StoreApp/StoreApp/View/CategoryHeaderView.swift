@@ -11,6 +11,16 @@ import Then
 import SnapKit
 
 
+// MARK: - Section
+
+protocol Section {
+    var index: Int { get }
+    var title: String { get }
+    var description: String { get }
+}
+
+// MARK: - CategoryHeaderView
+
 class CategoryHeaderView: UITableViewHeaderFooterView {
     
     let badgeView: BadgeView = BadgeView(style: .none, text: "")
@@ -40,8 +50,8 @@ class CategoryHeaderView: UITableViewHeaderFooterView {
 
 extension CategoryHeaderView {
     
-    func configure(category: Category) {
-        badgeView.configure(style: .none, text: category.rawValue)
+    func configure(category: Section) {
+        badgeView.configure(style: .none, text: category.title)
         
         let description = NSMutableAttributedString(string: category.description)
         titleLabel.attributedText = description.beauty
