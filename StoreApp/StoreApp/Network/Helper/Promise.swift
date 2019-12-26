@@ -7,42 +7,41 @@
 //
 
 import Foundation
+import Then
 
 class Promise<T> {
     
     // MARK: - Properties
     
     var value: T? {
-        didSet {
-            let task = DispatchWorkItem(block: { self.handler?(self.value) })
-            thread(task)
-        }
+        didSet { execute() }
     }
     
-    private var thread = DispatchQueue.global().async(execute:)
+    var thread: ProcessingThread?
     
-    private var handler: ((T?) -> Void)? {
-        didSet {
-            let task = DispatchWorkItem(block: { self.handler?(self.value) })
-            thread(task)
-        }
+    var handler: ((T?) -> Void)? {
+        didSet { execute() }
     }
+    
     // MARK: - Methods
     
     @discardableResult
     func work(on threadType: ProcessingThread) -> Self {
-        switch threadType {
-        case .main:
-            self.thread = DispatchQueue.main.async(execute:)
-        case .global:
-            self.thread = DispatchQueue.global().async(execute:)
-        }
-        
+        self.thread = threadType
         return self
     }
     
     func handle(_ handler: ((T?) -> Void)?) {
         self.handler = handler
+    }
+    
+    private func execute() {
+        guard let thread = thread else { return }
+        let task = DispatchWorkItem { self.handler?(self.value) }
+        switch thread {
+        case .main: DispatchQueue.main.async(execute: task)
+        case .global: DispatchQueue.global().async(execute: task)
+        }
     }
     
     // MARK: - ProcessingTread
@@ -53,3 +52,6 @@ class Promise<T> {
     }
 }
 
+// MARK: - Then
+
+extension Promise: Then {}
