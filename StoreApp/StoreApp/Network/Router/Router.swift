@@ -15,8 +15,7 @@ struct Router {
         let promiss = Promise<Result<[Menu], Error>>()
         guard let request = EncodingService.encode(endpoint) else { return promiss }
         
-        let task = session.dataTask(with: request) {
-            data, response, error in
+        let task = session.dataTask(with: request) { data, response, error in
             if let error = error {
                 promiss.value = .failure(error)
             }
