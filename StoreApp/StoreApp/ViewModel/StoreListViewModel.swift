@@ -9,9 +9,6 @@
 import Foundation
 import UIKit
 
-
-typealias Store = (category: Category, menus: [Menu])
-
 final class StoreListViewModel: StoreListViewBindable {
     
     // MARK: - Dependencies

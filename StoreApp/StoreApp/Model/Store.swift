@@ -7,3 +7,17 @@
 //
 
 import Foundation
+
+struct Store {
+    
+    // MARK: - Properties
+    
+    let category: Category
+    var menus: [Menu] = []
+    
+    // MARK: - Factory
+    
+    static func allStore() -> [Store] {
+        return Category.allCases.map { Store(category: $0) }
+    }
+}
