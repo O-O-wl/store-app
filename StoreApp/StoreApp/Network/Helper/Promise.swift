@@ -23,6 +23,10 @@ class Promise<T> {
         didSet { execute() }
     }
     
+    deinit {
+        
+    }
+    
     // MARK: - Methods
     
     @discardableResult
@@ -31,16 +35,18 @@ class Promise<T> {
         return self
     }
     
-    func handle(_ handler: ((T?) -> Void)?) {
+    func handle(_ handler: ((T?) -> Void)?) -> Self {
         self.handler = handler
+        return self
     }
     
     private func execute() {
         guard let thread = thread else { return }
+        
         let task = DispatchWorkItem { self.handler?(self.value) }
         switch thread {
         case .main: DispatchQueue.main.async(execute: task)
-        case .global: DispatchQueue.global().async(execute: task)
+        case .background: DispatchQueue.global().async(execute: task)
         }
     }
     
@@ -48,7 +54,7 @@ class Promise<T> {
     
     enum ProcessingThread {
         case main
-        case global
+        case background
     }
 }
 
