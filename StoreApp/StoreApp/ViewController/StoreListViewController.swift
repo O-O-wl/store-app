@@ -50,6 +50,7 @@ extension StoreListViewController {
     private func setUpAttribute() {
         self.view.do {
             $0.addSubview(storeTableView)
+            $0.backgroundColor = .systemBackground
         }
         
         storeTableView.do {
@@ -65,7 +66,8 @@ extension StoreListViewController {
     
     private func setUpConstraints() {
         storeTableView.snp.makeConstraints {
-            $0.edges.equalTo(self.view.safeAreaLayoutGuide)
+            $0.top.equalTo(self.view.safeAreaLayoutGuide)
+            $0.leading.trailing.bottom.equalTo(self.view)
         }
     }
 }
@@ -80,6 +82,9 @@ extension StoreListViewController {
         viewModel.sectionDataDidUpdate = { [weak self] section in
             DispatchQueue.main.async {
                 self?.storeTableView.reloadData()
+                self?.storeTableView.beginUpdates()
+                self?.storeTableView.reloadSections([section], with: .automatic)
+                self?.storeTableView.endUpdates()
             }
         }
         
