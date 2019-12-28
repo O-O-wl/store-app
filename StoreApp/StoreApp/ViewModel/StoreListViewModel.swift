@@ -27,7 +27,7 @@ final class StoreListViewModel: StoreListViewBindable {
     var dataDidSelected: ((Menu) -> Void)?
     
     // MARK: - Initializer
-    
+
     init(service: StoreDataService) {
         self.service = service
         
