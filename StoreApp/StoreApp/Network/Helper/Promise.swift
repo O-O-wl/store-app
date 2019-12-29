@@ -23,19 +23,15 @@ class Promise<T> {
         didSet { execute() }
     }
     
-    deinit {
-        
-    }
-    
     // MARK: - Methods
     
     @discardableResult
-    func work(on threadType: ProcessingThread) -> Self {
-        self.thread = threadType
+    func on(thread: ProcessingThread) -> Self {
+        self.thread = thread
         return self
     }
     
-    func handle(_ handler: ((T?) -> Void)?) -> Self {
+    func after(_ handler: ((T?) -> Void)?) -> Self {
         self.handler = handler
         return self
     }
