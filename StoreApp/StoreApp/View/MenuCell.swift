@@ -12,13 +12,14 @@ import Then
 final class MenuCell: UITableViewCell, Reusable {
     
     // MARK: - UI
-    static var a = true
+    
     private let menuImageView = UIImageView()
     private let titleLabel = UILabel()
     private let detailLabel = UILabel()
     private let priceLabel = UILabel()
     private let salePriceLabel = UILabel()
     private let badgesListView = BadgeListView()
+    private let processIndicator = UIActivityIndicatorView()
     
     // MARK: - Properties
     
@@ -28,7 +29,7 @@ final class MenuCell: UITableViewCell, Reusable {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+       
         setUpAttributes()
     }
     
@@ -89,18 +90,21 @@ extension MenuCell {
     }
     
     private func configureImage(contentOf url: URL) {
-        imageData = ImageDataRepository.shared.fetchImageData(from: url)
-        
-        imageData?
-            .work(on: .main)
-            .handle { [weak self] in
-                guard let data = $0 else { return }
-                
+        imageData?.cancel()
+        processIndicator.startAnimating()
+        imageData = ImageDataRepository.shared
+            .fetchImageData(from: url)
+            .on(thread: .main)
+            .after { [weak self] data in
+                guard let data = data else { return }
+            
                 self?.menuImageView.image = UIImage(data: data)
+                self?.processIndicator.stopAnimating()
         }
     }
     
     private func clear() {
+        // FIXME
         menuImageView.image = nil
         titleLabel.text = nil
         detailLabel.text = nil
@@ -124,6 +128,10 @@ extension MenuCell {
             $0.addSubview(badgesListView)
         }
         
+        menuImageView.do {
+            $0.addSubview(processIndicator)
+        }
+        
         titleLabel.do {
             $0.font = .titleFont
         }
@@ -142,6 +150,7 @@ extension MenuCell {
             $0.font = .discountedPriceFont
             $0.textColor = .mint
         }
+        
     }
     
     private func setUpConstraints() {
@@ -178,6 +187,11 @@ extension MenuCell {
         badgesListView.snp.updateConstraints {
             $0.height.leading.trailing.equalTo(titleLabel)
             $0.top.equalTo(priceLabel.snp.bottom).offset(5)
+        }
+        
+        processIndicator.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.width.height.equalToSuperview().dividedBy(2)
         }
     }
 }
