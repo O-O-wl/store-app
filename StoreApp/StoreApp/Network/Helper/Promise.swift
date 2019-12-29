@@ -31,15 +31,20 @@ class Promise<T> {
         return self
     }
     
+    @discardableResult
     func after(_ handler: ((T?) -> Void)?) -> Self {
         self.handler = handler
         return self
     }
     
+    func cancel() {
+        handler = nil
+    }
+    
     private func execute() {
-        guard let thread = thread else { return }
+        guard let thread = thread, let handler = handler else { return }
         
-        let task = DispatchWorkItem { self.handler?(self.value) }
+        let task = DispatchWorkItem { handler(self.value) }
         switch thread {
         case .main: DispatchQueue.main.async(execute: task)
         case .background: DispatchQueue.global().async(execute: task)
