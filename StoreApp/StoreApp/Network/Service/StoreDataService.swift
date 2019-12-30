@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import BaminChan
 
 protocol StoreDataService {
     func fetchData(category: Category) -> Promise<Result<[Menu], Error>>

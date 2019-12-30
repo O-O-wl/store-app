@@ -8,7 +8,8 @@
 
 import Foundation
 
-struct Response: Decodable {
-    let statusCode: Int
-    let body: [Menu]
+public struct Response: Decodable {
+    
+    public let statusCode: Int
+    public let body: [Menu]
 }

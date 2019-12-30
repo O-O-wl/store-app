@@ -6,6 +6,7 @@
 //  Copyright © 2019 이동영. All rights reserved.
 //
 import Foundation
+import BaminChan
 
 struct StubDataService: StoreDataService {
     

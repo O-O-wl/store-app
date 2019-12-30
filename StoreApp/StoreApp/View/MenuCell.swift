@@ -8,6 +8,11 @@
 
 import UIKit
 import Then
+import BaminChan
+
+// MARK: - Then
+
+extension Menu: Then {}
 
 final class MenuCell: UITableViewCell, Reusable {
     

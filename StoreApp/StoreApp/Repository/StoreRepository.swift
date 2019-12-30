@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import BaminChan
 
 class StoreRepository: StoreDataService {
     

@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import BaminChan
 
 final class StoreListViewModel: StoreListViewBindable {
     
