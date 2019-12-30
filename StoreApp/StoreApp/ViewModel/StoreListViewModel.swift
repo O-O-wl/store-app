@@ -41,7 +41,6 @@ final class StoreListViewModel: StoreListViewBindable {
     }
     
     func numOfMenusInCategory(_ category: Int) -> Int {
-        
         return stores[category].menus.count
     }
     
@@ -74,8 +73,8 @@ extension StoreListViewModel {
     private func fetchMenus(in category: Category) {
         service
             .fetchData(category: category)
-            .work(on: .main)
-            .handle { result in
+            .on(thread: .main)
+            .after { result in
                 guard let result = result else { return }
                 switch result {
                 case .success(let menus):
